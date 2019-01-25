@@ -1,0 +1,158 @@
+#include "CreatePokemonObjectCode.h"
+int main() {
+	using namespace std::this_thread;
+	//Player Name 	
+	string player;
+	cout << "Please Enter Your Name" << endl;
+	sleep_for(1s);
+	cin >> player;
+	cout << endl;
+	sleep_for(1s);
+	//Pokemon Names
+	string pokeName;
+	pokemonCreator playerPokemon("", 0, 0, 0, 0);
+Question:
+	cout << "Which pokemon would you like?" << endl;
+	sleep_for(1s);
+	cout << "Charmander" << endl << "Snorlax" << endl << "Clefairy" << endl << "Pikachu" << endl << "Squirtle" << endl << "Bulbasaur" << endl << endl;
+	sleep_for(1s);
+	cin >> pokeName;
+	cout << endl; 
+	//Create Player Pokemon 
+	if (pokeName == "Pikachu" || pokeName == "pikachu") {
+		playerPokemon.changeStats("Pikachu", 25, 65, 0.05, 10);
+	}
+	else if (pokeName == "Squirtle" || pokeName == "squirtle") {
+		playerPokemon.changeStats("Squirtle", 9, 45, 0.75, 2);
+		pokeName = "Squirtle";
+	}
+	else if (pokeName == "Bulbasaur" || pokeName == "bulbasaur") {
+		playerPokemon.changeStats("Bulbasaur", 12, 80, 0.57, 3);
+		pokeName = "Bulbasaur";
+	}
+	else if (pokeName == "Charmander" || pokeName == "charmander") {
+		playerPokemon.changeStats("Charmander", 25, 50, 0.025, 6);
+		pokeName = "Charmander";
+	}
+	else if (pokeName == "Snorlax" || pokeName == "snorlax") {
+		playerPokemon.changeStats("Snorlax", 7, 200, 0.0, 0);
+		pokeName = "Snorlax";
+	}
+	else if (pokeName == "Clefairy" || pokeName == "clefairy") {
+		playerPokemon.changeStats("Clefairy", 8, 80, 0.37, 1);
+		pokeName = "Clefairy";
+	}
+	else if (pokeName == "Mewtwo" || pokeName == "mewtwo") {
+		playerPokemon.changeStats("Mewtwo", 1000, 100, 0.99, 100);
+		pokeName = "Mewtwo";
+	}
+	else if (pokeName == "Inseo") {
+		playerPokemon.changeStats("Inseo", 100, 100, 0.991, 100);
+	}
+	else {
+		cout << "Please select a pokemon" << endl;
+		goto Question;
+	}
+	//Player Selects Enemy Pokemon 
+	string enemyPokeName;
+	pokemonCreator enemyPokemon("", 0, 0, 0, 0);
+	bool firstTime = true;
+	cout << "=======================" << endl;
+	cout << "        BATTLE        " << endl;
+	cout << "=======================" << endl;
+	sleep_for(1s);
+	cout << "Please select enemy pokemon" << endl;
+Question2:
+	sleep_for(1s);
+	cout << "Charmander" << endl << "Snorlax" << endl << "Clefairy" << endl << "Pikachu" << endl << "Squirtle" << endl << "Bulbasaur" << endl << "Unknown Pokemon" << endl <<endl;
+	sleep_for(1s);
+	if (firstTime == true) { //Without "if" cin.ignore will ignore the first letter of user input each time 
+		cin.ignore(); //ALWAYS INCLUDE cin.ignore(); when using getline(cin,enemyPokeName); 
+	}
+	getline(cin, enemyPokeName); //Uses entire line of user input (useful for using more than 1 word)
+	//Create Enemy Pokemon
+	if (enemyPokeName == "Charmander" || enemyPokeName == "charmander") {
+		enemyPokemon.changeStats("Charmander", 25, 50, 0.025, 6);
+		enemyPokeName = "Charmander";
+	}
+	else if (enemyPokeName == "Snorlax" || enemyPokeName == "snorlax") {
+		enemyPokemon.changeStats("Snorlax", 7, 200, 0.0, 0);
+		enemyPokeName = "Snorlax";
+	}
+	else if (enemyPokeName == "Clefairy" || enemyPokeName == "clefairy") {
+		enemyPokemon.changeStats("Clefairy", 8, 80, 0.37, 1);
+		enemyPokeName = "Clefairy";
+	}
+	else if (enemyPokeName == "Pikachu" || enemyPokeName == "pikachu") {
+		enemyPokemon.changeStats("Pikachu", 25, 65, 0.05, 10);
+		enemyPokeName = "Pikachu";
+	}
+	else if (enemyPokeName == "Squirtle" || enemyPokeName == "squirtle") {
+		enemyPokemon.changeStats("Squirtle", 9, 45, 0.75, 2);
+		enemyPokeName = "Squirtle";
+	}
+	else if (enemyPokeName == "Bulbasaur" || enemyPokeName == "bulbasaur") {
+		enemyPokemon.changeStats("Bulbasaur", 11, 70, 0.4, 3);
+		enemyPokeName = "Bulbasaur";
+	}
+	else if (enemyPokeName == "Unknown Pokemon" || enemyPokeName == "unknown pokemon") {
+		enemyPokemon.changeStats("Mewtwo", 1000, 100, 0.99, 100);
+		enemyPokeName = "Mewtwo";
+	}
+	else if (enemyPokeName == "Inseo") {
+		enemyPokemon.changeStats("Inseo", 100, 100, 0.99, 81);
+	}
+	else {
+		cout << "Please Select an enemy Pokemon" << endl;
+		firstTime = false;
+		goto Question2;
+	}
+	cout << endl;
+	//Create Pokemon Battle
+	sleep_for(1s); //Time to wait MUST ALWAYS BE INT 
+	cout << "Battle between " + player + "'s pokemon " + pokeName + " vs. " + enemyPokeName << endl;
+	sleep_for(1s);
+	cout << endl;
+	for (int x = 0; x <= 40; x++) {
+		sleep_for(150ms); 
+		cout << "-";
+	}
+	cout << endl;
+	cout << "         BATTLE BEGIN" << endl << endl;
+	sleep_for(1s);
+	cout << pokeName + "                      " + enemyPokeName << endl;
+	cout << playerPokemon.hp << "                          " << enemyPokemon.hp << endl;
+	while (playerPokemon.hp > 0 && enemyPokemon.hp > 0) {
+		if (playerPokemon.speed >= enemyPokemon.speed) {
+			enemyPokemon.hp = enemyPokemon.hp - (playerPokemon.att - (playerPokemon.att * enemyPokemon.def));
+			if (playerPokemon.hp <= 0) {
+				break; 
+			}
+			playerPokemon.hp = playerPokemon.hp - (enemyPokemon.att - (enemyPokemon.att * playerPokemon.def));
+			cout << playerPokemon.hp << "                          " << enemyPokemon.hp << endl;
+			sleep_for(1s);
+		}
+		else if (enemyPokemon.speed >= playerPokemon.speed) {
+			playerPokemon.hp = playerPokemon.hp - (enemyPokemon.att - (enemyPokemon.att * playerPokemon.def));
+			if (enemyPokemon.hp <= 0) {
+				break;
+			}
+			enemyPokemon.hp = enemyPokemon.hp - (playerPokemon.att - (playerPokemon.att * enemyPokemon.def));
+			cout << playerPokemon.hp << "                          " << enemyPokemon.hp << endl;
+			sleep_for(1s);
+		}
+
+		if (enemyPokemon.hp <= 0 && playerPokemon.hp <= 0) {
+			cout << "TIE BREAKER " << endl;
+		}
+		else if (enemyPokemon.hp <= 0) {
+			cout << "You win " + player << endl;
+		}
+		else if (playerPokemon.hp <=0) {
+			cout << "You lose " + player<< endl; 
+		}
+		}
+	for (int b = 0; b <= 2; b--) {
+		sleep_for(1s);
+	}
+}

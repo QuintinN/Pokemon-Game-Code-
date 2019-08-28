@@ -46,9 +46,6 @@ Question:
 		playerPokemon.changeStats("Mewtwo", 1000, 100, 0.99, 100);
 		pokeName = "Mewtwo";
 	}
-	else if (pokeName == "Inseo") {
-		playerPokemon.changeStats("Inseo", 100, 100, 0.991, 100);
-	}
 	else {
 		cout << "Please select a pokemon" << endl;
 		goto Question;
@@ -98,9 +95,6 @@ Question2:
 	else if (enemyPokeName == "Unknown Pokemon" || enemyPokeName == "unknown pokemon") {
 		enemyPokemon.changeStats("Mewtwo", 1000, 100, 0.99, 100);
 		enemyPokeName = "Mewtwo";
-	}
-	else if (enemyPokeName == "Inseo") {
-		enemyPokemon.changeStats("Inseo", 100, 100, 0.99, 81);
 	}
 	else {
 		cout << "Please Select an enemy Pokemon" << endl;
